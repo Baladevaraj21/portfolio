@@ -65,26 +65,46 @@ export default function Contact() {
     setStatus("connecting");
     setLogs([]);
 
-    await addLog("INITIATING SMTP HANDSHAKE...", 400);
-    await addLog("RESOLVING HOST smtp.baladeva.ai ON PORT 587...", 600);
+    await addLog("INITIATING DATABASE CONNECTION HANDSHAKE...", 400);
+    await addLog("CONNECTING TO MONGODB REPLICA SET...", 500);
     
     setStatus("sending");
-    await addLog("ESTABLISHING SECURED SSL/TLS CHANNEL...", 500);
-    await addLog("ENCRYPTING PACKET LOAD WITH AES-256...", 400);
-    await addLog("TRANSMITTING ENCRYPTED CONTENT OVER FIBER PIPELINE...", 800);
-    
-    setStatus("success");
-    await addLog("TRANSMISSION SUCCESSFUL! DISCONNECTING HOST.", 300);
+    await addLog("ESTABLISHING SECURED SSL/TLS CHANNEL...", 400);
+    await addLog("ENCRYPTING PAYLOAD WITH AES-256...", 300);
+    await addLog("TRANSMITTING PAYLOAD DATA TO API/CONTACT NODE...", 600);
 
-    // Trigger celebration
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ["#06B6D4", "#7C3AED", "#22C55E"],
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        await addLog("TRANSMISSION SUCCESSFUL! PAYLOAD INGESTED BY MONGODB.", 300);
+
+        // Trigger celebration
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#06B6D4", "#7C3AED", "#22C55E"],
+        });
+
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+        await addLog(`CRITICAL ERROR: ${data.error || "Transmission rejected"}`, 100);
+      }
+    } catch (err: any) {
+      setStatus("error");
+      await addLog(`CONNECTION FAILED: ${err.message || "Network error"}`, 100);
+    }
   };
 
   return (
