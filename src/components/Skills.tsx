@@ -2,49 +2,57 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Code2, Globe, Database, BrainCircuit, Wrench, Sparkles } from "lucide-react";
+import { Code2, Globe, Database, BrainCircuit, Wrench, Sparkles, Shield, Layers } from "lucide-react";
 import { useThemeGlow } from "./ThemeContext";
 
 interface Skill {
   name: string;
   level: number; // percentage
-  category: "prog" | "web" | "db" | "ai" | "tools";
+  category: "prog" | "front" | "back" | "db" | "auth" | "tools" | "aitools";
 }
 
 const skillsData: Skill[] = [
   // Programming
   { name: "Python", level: 90, category: "prog" },
-  { name: "Java", level: 80, category: "prog" },
-  { name: "C", level: 75, category: "prog" },
+  { name: "JavaScript", level: 85, category: "prog" },
+  { name: "HTML5", level: 90, category: "prog" },
+  { name: "CSS3", level: 85, category: "prog" },
   
-  // Web Dev
-  { name: "HTML & CSS", level: 90, category: "web" },
-  { name: "JavaScript", level: 85, category: "web" },
-  { name: "Django", level: 80, category: "web" },
-  { name: "Flask", level: 85, category: "web" },
+  // Frontend
+  { name: "React", level: 90, category: "front" },
+  { name: "Vite", level: 85, category: "front" },
+  
+  // Backend
+  { name: "Node.js", level: 80, category: "back" },
+  { name: "Express.js", level: 85, category: "back" },
   
   // Database
-  { name: "MongoDB", level: 75, category: "db" },
-  { name: "MySQL", level: 80, category: "db" },
+  { name: "MongoDB", level: 80, category: "db" },
   
-  // AI & CV
-  { name: "OpenCV", level: 85, category: "ai" },
-  { name: "MediaPipe", level: 80, category: "ai" },
-  { name: "Machine Learning", level: 80, category: "ai" },
+  // Authentication
+  { name: "JWT (JSON Web Token)", level: 85, category: "auth" },
   
   // Tools
-  { name: "Git & GitHub", level: 85, category: "tools" },
+  { name: "Git", level: 85, category: "tools" },
+  { name: "GitHub", level: 90, category: "tools" },
   { name: "VS Code", level: 90, category: "tools" },
-  { name: "Figma", level: 70, category: "tools" },
+  { name: "Postman", level: 80, category: "tools" },
+
+  // AI Tools
+  { name: "ChatGPT", level: 95, category: "aitools" },
+  { name: "GitHub Copilot", level: 90, category: "aitools" },
+  { name: "Gemini", level: 95, category: "aitools" },
 ];
 
 const categories = [
   { id: "all", label: "All Sectors", icon: Sparkles },
   { id: "prog", label: "Programming", icon: Code2 },
-  { id: "web", label: "Web Dev", icon: Globe },
-  { id: "db", label: "Databases", icon: Database },
-  { id: "ai", label: "AI & CV", icon: BrainCircuit },
-  { id: "tools", label: "Dev Tools", icon: Wrench },
+  { id: "front", label: "Frontend", icon: Globe },
+  { id: "back", label: "Backend", icon: Layers },
+  { id: "db", label: "Database", icon: Database },
+  { id: "auth", label: "Authentication", icon: Shield },
+  { id: "tools", label: "Tools", icon: Wrench },
+  { id: "aitools", label: "AI Tools", icon: BrainCircuit },
 ];
 
 export default function Skills() {

@@ -2,13 +2,25 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Terminal, BookOpen, BrainCircuit, Activity } from "lucide-react";
+import { Terminal, BookOpen, BrainCircuit, Activity, Code2, Megaphone, Palette, Lightbulb, Cloud, Globe } from "lucide-react";
 import { useThemeGlow } from "./ThemeContext";
 
 const tabs = [
   { id: "bio", label: "SYS_BIO.log", icon: Terminal },
   { id: "edu", label: "EDU_LOG.dat", icon: BookOpen },
   { id: "ai", label: "AI_CORE.ini", icon: BrainCircuit },
+  { id: "interests", label: "SYS_INTERESTS.cfg", icon: Activity },
+];
+
+const interestsData = [
+  { name: "Artificial Intelligence", icon: BrainCircuit },
+  { name: "Full Stack Development", icon: Code2 },
+  { name: "Digital Marketing", icon: Megaphone },
+  { name: "UI/UX Design", icon: Palette },
+  { name: "Software Development", icon: Terminal },
+  { name: "Problem Solving", icon: Lightbulb },
+  { name: "Cloud Technologies", icon: Cloud },
+  { name: "Modern Web Applications", icon: Globe },
 ];
 
 export default function About() {
@@ -141,10 +153,12 @@ export default function About() {
                     <div className="relative">
                       <div className="absolute -left-[30px] top-1.5 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#06B6D4]" />
                       <div className="flex flex-col md:flex-row justify-between md:items-center">
-                        <h4 className="text-white font-bold text-base">Bachelor of Engineering in Computer Science</h4>
+                        <h4 className="text-white font-bold text-base">Bachelor of Engineering (Computer Science Engineering)</h4>
                         <span className="text-xs text-cyan-400/80 bg-slate-900 border border-cyan-500/25 px-2 py-0.5 rounded mt-1 md:mt-0 w-fit">2023 - Present</span>
                       </div>
-                      <p className="text-slate-400 text-xs mt-1">Focusing on Algorithms, Systems Software, Database Management, and AI Architectures.</p>
+                      <p className="text-slate-300 font-medium text-xs mt-1">Mahendra Institute of Technology</p>
+                      <p className="text-cyan-400 font-mono text-[10px] mt-0.5">CURRENT STATUS: Final Year Student</p>
+                      <p className="text-slate-400 text-xs mt-1.5">Focusing on Algorithms, Systems Software, Database Management, and AI Architectures.</p>
                     </div>
 
                     {/* Education Item 2 */}
@@ -187,6 +201,46 @@ export default function About() {
                       <span className="text-[10px] text-emerald-400">ML INFERENCE:</span>
                       <span className="text-xs text-white font-semibold">Local YOLOv8 deployments</span>
                     </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeTab === "interests" && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col gap-4 font-mono text-sm leading-relaxed"
+                >
+                  <p className="text-cyan-400 font-bold text-base">&gt; CAT SYS_INTERESTS.cfg</p>
+                  <p className="text-slate-300">
+                    Active cognitive vectors driving current development focus:
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+                    {interestsData.map((interest, i) => {
+                      const Icon = interest.icon;
+                      return (
+                        <motion.div
+                          key={interest.name}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.05 }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          className={`p-4 rounded border border-white/5 bg-slate-900/40 hover:bg-slate-900/60 flex flex-col items-center justify-center gap-3 text-center transition-all duration-300 group ${
+                            glow === "cyan" ? "hover:border-cyan-500/30 hover:shadow-[0_0_10px_rgba(6,182,212,0.15)]" :
+                            glow === "purple" ? "hover:border-purple-500/30 hover:shadow-[0_0_10px_rgba(124,58,237,0.15)]" :
+                            "hover:border-green-500/30 hover:shadow-[0_0_10px_rgba(34,197,94,0.15)]"
+                          }`}
+                        >
+                          <div className={`w-10 h-10 rounded border border-white/5 bg-slate-950 flex items-center justify-center text-slate-400 group-hover:${glow === "cyan" ? "text-cyan-400 border-cyan-400/30" : glow === "purple" ? "text-purple-400 border-purple-400/30" : "text-green-400 border-green-400/30"} transition-all duration-300 shadow-[0_0_8px_transparent] group-hover:shadow-[0_0_12px_currentColor]`}>
+                            <Icon className="w-5 h-5 animate-pulse" />
+                          </div>
+                          <span className="text-[11px] text-white font-semibold tracking-wide">
+                            {interest.name}
+                          </span>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </motion.div>
               )}

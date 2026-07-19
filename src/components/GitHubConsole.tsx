@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
-import { GitPullRequest, GitFork, BookOpen, Star, Clock } from "lucide-react";
+import { GitPullRequest, BookOpen, Award, Code2, Layers } from "lucide-react";
 import { useThemeGlow } from "./ThemeContext";
 
 interface StatItem {
@@ -14,20 +14,20 @@ interface StatItem {
 }
 
 const statsData: StatItem[] = [
-  { label: "Projects Completed", value: 15, suffix: "+", icon: GitPullRequest },
-  { label: "Technologies Learned", value: 12, suffix: "+", icon: BookOpen },
-  { label: "Certificates Earned", value: 8, suffix: "", icon: Star },
-  { label: "GitHub Repositories", value: 22, suffix: "", icon: GitFork },
-  { label: "Coding Hours Logged", value: 2500, suffix: "+", icon: Clock },
+  { label: "Projects Completed", value: 1, suffix: "+", icon: GitPullRequest },
+  { label: "Internship Completed", value: 1, suffix: "", icon: Award },
+  { label: "Programming Languages", value: 4, suffix: "+", icon: Code2 },
+  { label: "Frameworks & Libraries", value: 8, suffix: "+", icon: Layers },
+  { label: "Technologies Learned", value: 15, suffix: "+", icon: BookOpen },
 ];
 
 const languageData = [
-  { subject: "Python", A: 95, fullMark: 100 },
-  { subject: "JavaScript/TS", A: 85, fullMark: 100 },
-  { subject: "Java", A: 75, fullMark: 100 },
-  { subject: "C / C++", A: 70, fullMark: 100 },
-  { subject: "Databases", A: 80, fullMark: 100 },
-  { subject: "CSS/HTML", A: 90, fullMark: 100 },
+  { subject: "Python", A: 90, fullMark: 100 },
+  { subject: "JavaScript", A: 85, fullMark: 100 },
+  { subject: "HTML5/CSS3", A: 90, fullMark: 100 },
+  { subject: "React/Vite", A: 90, fullMark: 100 },
+  { subject: "Node/Express", A: 80, fullMark: 100 },
+  { subject: "MongoDB", A: 80, fullMark: 100 },
 ];
 
 // Helper to generate contributions grid
